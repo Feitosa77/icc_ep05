@@ -27,7 +27,7 @@ double styblinski(double *x, int order)
 
 
 // Integral Monte Carlo da função Styblinski-Tang de 2 variáveis
-double styblinskiTang(double a, double b, int namostras)
+double styblinskiTang(double a, double b, int namostras, int d)
 {
   double resultado;
   double soma = 0.0;
@@ -39,14 +39,14 @@ double styblinskiTang(double a, double b, int namostras)
   
   /* AQUI IMPLEMENTE O CÁLCULO DA INTEGRAL PELO MÉTODO DE MONTE CARLO */
   
-  double x[2];
+  double x[d];
 
   for (int j = 0; j < namostras; ++j)
   {
-    for (int i = 0; i < 2; ++i) 
+    for (int i = 0; i < d; ++i) 
       x[i] = a + ((double) random()/RAND_MAX)*(b-a); /* Intervalo Aleatorio */
 
-    soma += styblinski(&x, 2); 
+    soma += styblinski(&x, d); 
   }
 
   resultado = (soma/namostras)*(b-a);
@@ -112,7 +112,7 @@ int main(int argc, char **argv) {
   srandom(20232);
     
   // CHAMAR FUNÇÕES DE INTEGRAÇÃO E EXIBIR RESULTADOS
-  printf("Resultado: %lf\n\n", styblinskiTang(a, b, n_amostras));
+  printf("Resultado: %lf\n\n", styblinskiTang(a, b, n_amostras, n_variaveis));
   printf("Resultado: %lf\n\n", retangulos_xy(a, b, n_amostras));
   
   return 0;
