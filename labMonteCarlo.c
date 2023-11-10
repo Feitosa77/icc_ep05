@@ -75,16 +75,17 @@ double retangulos_xy(double a, double b, int npontos) {
 
   double x[2], aux;
 
-  for (int j = 0; j < npontos; ++j)
+  for (int i = 0; i < npontos; ++i)
   {
-    aux = (a+h-j)*h;
-    for (int i = 0; i < 2; ++i)
-      x[i] = aux;
-
-    soma += styblinski(&x, 2) * h * h;
+    x[0] = (a+h*i);
+    for (int j = 0; j < npontos; ++j)
+    {
+      x[1] = (a+h*j);
+      soma += styblinski(&x, 2);
+    }
   }
 
-  resultado = soma;
+  resultado = soma * h * h;
     
   /* */
   
